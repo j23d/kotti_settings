@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      metal:use-macro="api.macro('kotti:templates/view/master.pt')"
+      i18n:domain="kotti_settings">
+
+  <div metal:fill-slot="content" class="abc-view content">
+    <h1>Settings</h1>
+    <p class="description">
+      some description
+    </p>
+
+    <ul class="nav nav-tabs">
+      <tal:navpoint tal:repeat="view settings_form_views">
+        <li tal:define="index repeat.view.index;
+                        str_index str(index);"
+             class="${index == 0 and 'active'}">
+          <a href="#settings-${str_index}-tab" data-toggle="tab" i18n:translate="">${view['title']}</a>
+        </li>
+      </tal:navpoint>
+    </ul>
+
+
+    <div class="tab-content">
+      <tal:repeat tal:repeat="view settings_form_views">
+        
+        <div tal:define="index repeat.view.index;
+                         str_index str(index);
+                         tab_id string:settings-${str_index}-tab"
+             class="tab-pane ${tab_id and 'active'}"
+             id="${tab_id}">
+             <span>${tab_id}</span>
+          <form tal:replace="structure settings_form_views[index]['form']" />
+        </div>
+      </tal:repeat>
+    </div>
+            
+  </div>
+
+</html>

@@ -1,0 +1,29 @@
+*.py[co]
+Kotti.db
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+include
+lib
+local
+var
+sdist
+develop-eggs
+.installed.cfg
+.cache
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+
+#Translations
+*.mo
