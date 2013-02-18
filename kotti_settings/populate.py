@@ -3,8 +3,7 @@ from kotti_settings.resources import Settings
 
 
 def populate():
-    """
-    add values for settings table
+    """Add container in the settings table for the data.
     """
     if DBSession.query(Settings).count() == 0:
         settings = Settings(data={})

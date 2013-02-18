@@ -21,12 +21,13 @@ class SettingsFormView(FormView):
     """The form template class for one setting tab.
     """
     name = 'settings'
-    title = u"Settings"
+    title = _(u"Settings")
     buttons = (
         Button('save', _(u'Save')),
         Button('cancel', _(u'Cancel')))
     success_message = _(u"Your changes have been saved.")
     success_url = None
+    schema = None
     schema_factory = SettingsSchema
     use_csrf_token = True
 
@@ -43,9 +44,10 @@ class SettingsFormView(FormView):
            failure proof util method
         """
         [settings] = DBSession.query(Settings).all()
-        # build the schema and append csrf token if needed
-        if self.schema_factory is not None:
+        # build the schema if it not exist
+        if self.schema is None:
             self.schema = self.schema_factory()
+        # append csrf token if needed
         if self.use_csrf_token and 'csrf_token' not in self.schema:
             self.schema.children.append(CSRFSchema()['csrf_token'])
         # enhance the schema with the given definitions

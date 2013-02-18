@@ -11,6 +11,7 @@ class ModuleSettings(object):
         self.title = None
         self.success_message = u''
         self.settings = []
+        self.schema = None
         self.settings_objs = []
         self.__dict__.update(kwargs)
 

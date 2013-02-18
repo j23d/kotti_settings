@@ -24,7 +24,7 @@ def add_settings(module_settings):
     """
     module_settings = ModuleSettings(**module_settings)
     if module_settings.module is None:
-        # If the module name is omitted get it.
+        # If the module name is omitted: get it
         frame = inspect.stack()[1]
         module = inspect.getmodule(frame[0])
         module_settings.module = module.__name__
