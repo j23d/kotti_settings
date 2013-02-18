@@ -30,7 +30,7 @@ class SettingsView(object):
             View = type(view_name, (SettingsFormView,), {
                 'title': settings.title,
                 'name': settings.name,
-                'schema': settings.schema,
+                'schema_factory': settings.schema_factory,
                 'settings': settings.settings_objs,
                 'success_message': settings.success_message,
             })

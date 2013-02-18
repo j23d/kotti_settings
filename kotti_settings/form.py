@@ -26,9 +26,9 @@ class SettingsFormView(FormView):
         Button('save', _(u'Save')),
         Button('cancel', _(u'Cancel')))
     success_message = _(u"Your changes have been saved.")
-    success_url = None
-    schema = None
-    schema_factory = SettingsSchema
+    # success_url = None
+    settings = []
+    schema_factory = None
     use_csrf_token = True
 
     def tab_title(self):
@@ -46,6 +46,8 @@ class SettingsFormView(FormView):
         [settings] = DBSession.query(Settings).all()
         # build the schema if it not exist
         if self.schema is None:
+            if self.schema_factory is None:
+                self.schema_factory = SettingsSchema
             self.schema = self.schema_factory()
         # append csrf token if needed
         if self.use_csrf_token and 'csrf_token' not in self.schema:

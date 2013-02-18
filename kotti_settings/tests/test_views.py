@@ -57,7 +57,6 @@ def test_settingtab_with_dict(db_session,
 def test_settingtab_with_schema(db_session,
                                 populate_kotti_settings,
                                 dummy_request):
-    from kotti_settings.form import SettingsSchema
     import colander
 
     class StringSchemaNode(colander.SchemaNode):
@@ -71,7 +70,7 @@ def test_settingtab_with_schema(db_session,
         default = 5
         title = 'Ranged Int'
 
-    class TestSchema(SettingsSchema):
+    class TestSchema(colander.MappingSchema):
         string = StringSchemaNode(colander.String())
         ranged_int = RangedIntSchemaNode(colander.Int())
 
@@ -79,7 +78,7 @@ def test_settingtab_with_schema(db_session,
         'name': 'test_settings_schema',
         'title': "Testsettings Schema",
         'success_message': u"Successfully saved test settings.",
-        'schema': TestSchema()
+        'schema_factory': TestSchema
     }
 
     add_settings(TestSettingsSchema)
