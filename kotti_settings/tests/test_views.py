@@ -24,9 +24,11 @@ def test_settingtab_with_dict(db_session,
                     name='test_settings_dict')
     assert form['title'] == "Testsettings Dict"
     assert form['form'].startswith('<form')
-    assert 'name="kotti_settings.tests.test_views-testsetting_1"' in form['form']
+    assert 'name="kotti_settings.tests.test_views-testsetting_1"'\
+        in form['form']
     assert 'value="my first string"' in form['form']
-    assert 'name="kotti_settings.tests.test_views-testsetting_2"' in form['form']
+    assert 'name="kotti_settings.tests.test_views-testsetting_2"'\
+        in form['form']
     assert 'value="23"' in form['form']
 
 
