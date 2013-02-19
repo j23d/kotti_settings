@@ -10,7 +10,6 @@ from kotti_settings.settings import ModuleSettings
 from kotti_settings.settings import SettingObj
 
 
-# @property
 def get_settings():
     settings = DBSession.query(Settings).order_by(desc(Settings.id)).first()
     data = {}

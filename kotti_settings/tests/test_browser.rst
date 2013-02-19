@@ -7,7 +7,7 @@ Setup and Login
   >>> from kotti import testing
   >>> tools = testing.setUpFunctional(
   ...     **{'kotti.configurators': 'kotti_settings.kotti_configure',
-  ...        'kotti.populators': 'kotti_settings.testing._populator kotti_settings.testing._add_schema_settings'
+  ...        'kotti.populators': 'kotti_settings.testing._populator kotti_settings.testing._add_browser_settings'
   ... })
   >>> browser = tools['Browser']()
   >>> ctrl = browser.getControl
@@ -31,9 +31,9 @@ Get to the settings page and change some settings
 
   >>> 'Testsettings Schema' in browser.contents
   True
-  >>> 'type="text" name="testrageintsetting" value="5"' in browser.contents
+  >>> 'type="text" name="kotti_settings.testing-testrageintsetting" value="5"' in browser.contents
   True
-  >>> 'type="text" name="teststringsetting" value="hello world"' in browser.contents
+  >>> 'type="text" name="kotti_settings.testing-teststringsetting" value="hello world"' in browser.contents
   True
 
   >>> ctrl('String').value = 'hello you'
@@ -53,7 +53,7 @@ Get to the settings page and change some settings
 
   >>> ctrl('Ranged Int').value = '7'
   >>> ctrl(name='save').click()
-  >>> 'type="text" name="testrageintsetting" value="7"' in browser.contents
+  >>> 'type="text" name="kotti_settings.testing-testrageintsetting" value="7"' in browser.contents
   True
-  >>> 'type="text" name="teststringsetting" value="hello you"' in browser.contents
+  >>> 'type="text" name="kotti_settings.testing-teststringsetting" value="hello you"' in browser.contents
   True

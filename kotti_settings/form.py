@@ -27,7 +27,7 @@ class SettingsFormView(FormView):
         Button('cancel', _(u'Cancel')))
     success_message = _(u"Your changes have been saved.")
     # success_url = None
-    settings = []
+    settings = None
     schema_factory = None
     use_csrf_token = True
 
@@ -53,7 +53,7 @@ class SettingsFormView(FormView):
         if self.use_csrf_token and 'csrf_token' not in self.schema:
             self.schema.children.append(CSRFSchema()['csrf_token'])
         # enhance the schema with the given definitions
-        for setting_obj in self.settings:
+        for setting_obj in self.settings.settings_objs:
             node = colander.SchemaNode(
                 self.colander_type(setting_obj.type)(),
                 name=setting_obj.field_name,
@@ -63,6 +63,12 @@ class SettingsFormView(FormView):
                 default=setting_obj.default
             )
             self.schema.children.append(node)
+        # the names of the children should begin with the module name
+        for child in self.schema.children:
+            if child.name == 'csrf_token':
+                continue
+            if not child.name.startswith(self.settings.module):
+                child.name = "%s-%s" % (self.settings.module, child.name)
         result = super(SettingsFormView, self).__call__()
         return result
 

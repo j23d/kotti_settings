@@ -3,9 +3,9 @@ from kotti.resources import get_root
 from kotti_settings.views import SettingsView
 from kotti_settings.util import add_settings
 
-from kotti_settings.tests.util import get_form
-from kotti_settings.tests.util import TestSettingsDict
-from kotti_settings.tests.util import TestSettingsSchema
+from kotti_settings.testing import get_form
+from kotti_settings.testing import TestSettingsDict
+from kotti_settings.testing import TestSettingsSchema
 
 
 def test_settingtab_with_dict(db_session,
@@ -24,10 +24,10 @@ def test_settingtab_with_dict(db_session,
                     name='test_settings_dict')
     assert form['title'] == "Testsettings Dict"
     assert form['form'].startswith('<form')
-    assert 'name="kotti_settings.tests.test_views-testsetting_1"'\
+    assert 'name="test_views-testsetting_1"'\
         in form['form']
     assert 'value="my first string"' in form['form']
-    assert 'name="kotti_settings.tests.test_views-testsetting_2"'\
+    assert 'name="test_views-testsetting_2"'\
         in form['form']
     assert 'value="23"' in form['form']
 
@@ -47,7 +47,7 @@ def test_settingtab_with_schema(db_session,
                     name='test_settings_schema')
     assert form['title'] == "Testsettings Schema"
     assert form['form'].startswith('<form')
-    assert 'name="teststringsetting"' in form['form']
-    assert 'value="hello world"' in form['form']
-    assert 'name="testrageintsetting"' in form['form']
-    assert 'value="5"' in form['form']
+    se = 'name="test_views-teststringsetting" value="hello world"'
+    assert se in form['form']
+    se = 'name="test_views-testrageintsetting" value="5"'
+    assert se in form['form']

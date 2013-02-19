@@ -31,7 +31,7 @@ class SettingsView(object):
                 'title': settings.title,
                 'name': settings.name,
                 'schema_factory': settings.schema_factory,
-                'settings': settings.settings_objs,
+                'settings': settings,
                 'success_message': settings.success_message,
             })
             view = View(self.context, self.request)
