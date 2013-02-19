@@ -6,7 +6,9 @@ Setup and Login
 
   >>> from kotti import testing
   >>> tools = testing.setUpFunctional(
-  ...     **{'kotti.configurators': 'kotti_settings.kotti_configure'})
+  ...     **{'kotti.configurators': 'kotti_settings.kotti_configure',
+  ...        'kotti.populators': 'kotti_settings.testing._populator kotti_settings.testing._add_schema_settings'
+  ... })
   >>> browser = tools['Browser']()
   >>> ctrl = browser.getControl
 
@@ -20,9 +22,38 @@ Setup and Login
   True
 
 
-Get to the settings page
-------------------------
+Get to the settings page and change some settings
+-------------------------------------------------
 
   >>> browser.open(testing.BASE_URL + '/@@settings')
   >>> 'Settings' in browser.contents
+  True
+
+  >>> 'Testsettings Schema' in browser.contents
+  True
+  >>> 'type="text" name="testrageintsetting" value="5"' in browser.contents
+  True
+  >>> 'type="text" name="teststringsetting" value="hello world"' in browser.contents
+  True
+
+  >>> ctrl('String').value = 'hello you'
+  >>> ctrl('Ranged Int').value = 'nan'
+  >>> ctrl(name='save').click()
+  >>> 'There was a problem' in browser.contents
+  True
+  >>> '"nan" is not a number' in browser.contents
+  True
+
+  >>> ctrl('Ranged Int').value = '23'
+  >>> ctrl(name='save').click()
+  >>> 'There was a problem' in browser.contents
+  True
+  >>> '23 is greater than maximum value 10' in browser.contents
+  True
+
+  >>> ctrl('Ranged Int').value = '7'
+  >>> ctrl(name='save').click()
+  >>> 'type="text" name="testrageintsetting" value="7"' in browser.contents
+  True
+  >>> 'type="text" name="teststringsetting" value="hello you"' in browser.contents
   True
