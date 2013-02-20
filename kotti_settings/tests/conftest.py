@@ -1,6 +1,6 @@
 # See http://kotti.readthedocs.org/en/latest/developing/testing.html
 from pytest import fixture
-from kotti.tests.configure import settings
+from kotti.tests import settings
 
 pytest_plugins = "kotti"
 
