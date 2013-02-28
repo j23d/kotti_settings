@@ -8,9 +8,7 @@ from kotti_settings.testing import TestSettingsDict
 from kotti_settings.testing import TestSettingsSchema
 
 
-def test_settingtab_with_dict(db_session,
-                              populate_kotti_settings,
-                              dummy_request):
+def test_settingtab_with_dict(db_session, dummy_request):
     add_settings(TestSettingsDict)
 
     root = get_root()
@@ -32,9 +30,7 @@ def test_settingtab_with_dict(db_session,
     assert 'value="23"' in form['form']
 
 
-def test_settingtab_with_schema(db_session,
-                                populate_kotti_settings,
-                                dummy_request):
+def test_settingtab_with_schema(db_session, dummy_request):
     add_settings(TestSettingsSchema)
     root = get_root()
     view = SettingsView(root, dummy_request)

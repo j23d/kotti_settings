@@ -7,9 +7,7 @@ from pyramid_deform import CSRFSchema
 from pyramid_deform import FormView
 from pyramid.httpexceptions import HTTPFound
 
-from kotti import DBSession
-
-from kotti_settings.resources import Settings
+from kotti_settings.util import get_settings
 from kotti_settings import _
 
 
@@ -43,7 +41,6 @@ class SettingsFormView(FormView):
         """get the settings - this should be done with some
            failure proof util method
         """
-        [settings] = DBSession.query(Settings).all()
         # build the schema if it not exist
         if self.schema is None:
             if self.schema_factory is None:
@@ -73,10 +70,10 @@ class SettingsFormView(FormView):
         return result
 
     def before(self, form):
-        [settings] = DBSession.query(Settings).all()
+        settings = get_settings()
         for key in form.cstruct:
-            if key in settings.data:
-                form.cstruct[key] = settings.data[key]
+            if key in settings:
+                form.cstruct[key] = settings[key]
 
     def colander_type(self, name):
         # http://docs.pylonsproject.org/projects/colander/en/latest/api.html#types
@@ -89,16 +86,12 @@ class SettingsFormView(FormView):
         raise TypeError("%s is not a class." % name)
 
     def save_success(self, appstruct):
-        [settings] = DBSession.query(Settings).all()
+        settings = get_settings()
         # https://github.com/Kotti/Kotti/commit/ca7db42711c9e29cb797dad95de0898eb598b72e
         appstruct.pop('csrf_token', None)
         for item in appstruct:
             if appstruct[item]:
-                settings.data[item] = appstruct[item]
-        # new_settings = settings.copy(data)
-        # DBSession.add(new_settings)
-        DBSession.add(settings)  # needed?
-        DBSession.flush()  # needed?
+                settings[item] = appstruct[item]
 
     def cancel_success(self, appstruct):
         self.request.session.flash(_(u'No changes made.'), 'info')

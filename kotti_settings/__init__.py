@@ -8,13 +8,15 @@ _ = TranslationStringFactory('kotti_settings')
 def kotti_configure(settings):
 
     settings['pyramid.includes'] += ' kotti_settings'
-    settings['kotti.populators'] += ' kotti_settings.populate.populate'
 
     settings = ViewLink('settings', title=_(u'Settings'))
     CONTROL_PANEL_LINKS.append(settings)
 
 
 def includeme(config):
+
+    #from kotti_settings.testing import _add_schema_settings
+    #_add_schema_settings()
 
     config.add_translation_dirs('kotti_settings:locale')
     config.scan(__name__)

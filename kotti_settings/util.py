@@ -1,21 +1,17 @@
 import inspect
 
-from sqlalchemy.sql.expression import desc
-
-from kotti import DBSession
+from kotti.resources import get_root
 
 from kotti_settings.config import SETTINGS
-from kotti_settings.resources import Settings
 from kotti_settings.settings import ModuleSettings
 from kotti_settings.settings import SettingObj
 
 
 def get_settings():
-    settings = DBSession.query(Settings).order_by(desc(Settings.id)).first()
-    data = {}
-    if settings is not None:
-        data = settings.data
-    return data
+    root = get_root()
+    if "kotti_settings" not in root.annotations:
+        root.annotations['kotti_settings'] = {}
+    return root.annotations['kotti_settings']
 
 
 def add_settings(module_settings):

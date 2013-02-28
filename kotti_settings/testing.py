@@ -69,13 +69,6 @@ TestSettingsSchemaBrowser = {
 }
 
 
-def _populator():
-    from kotti.populate import populate as kotti_p
-    from kotti_settings.populate import populate as kotti_settings_p
-    kotti_p()
-    kotti_settings_p()
-
-
 def _add_schema_settings():
     add_settings(TestSettingsSchema)
 

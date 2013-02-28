@@ -14,7 +14,6 @@ def test_kotti_configure():
     kotti_configure(settings)
 
     assert settings['pyramid.includes'] == ' kotti_settings'
-    assert settings['kotti.populators'] == ' kotti_settings.populate.populate'
 
 
 def test_includeme(config):
