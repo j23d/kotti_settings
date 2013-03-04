@@ -30,6 +30,11 @@ class SettingsForm(deform.form.Form):
         for key in settings.keys():
             if key not in keys:
                 controls.append((key, str(settings[key])))
+        from kotti_settings.config import SETTINGS
+        for settings in SETTINGS:
+            for obj in settings.settings_objs:
+                if obj.field_name not in keys:
+                    controls.append((obj.field_name, str(obj.default)))
         return super(SettingsForm, self).validate(controls, subcontrol)
 
 
