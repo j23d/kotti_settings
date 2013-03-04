@@ -50,9 +50,6 @@ class SettingsFormView(FormView):
     use_csrf_token = True
     use_ajax = True
 
-    def tab_title(self):
-        return self.title
-
     def __init__(self, context, request, **kwargs):
         self.context = context
         self.request = request

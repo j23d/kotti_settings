@@ -7,7 +7,7 @@ Setup and Login
   >>> from kotti import testing
   >>> tools = testing.setUpFunctional(
   ...     **{'kotti.configurators': 'kotti_settings.kotti_configure',
-  ...        'kotti.populators': 'kotti.testing._populator kotti_settings.testing._add_browser_settings'
+  ...        'kotti.populators': 'kotti.testing._populator kotti_settings.testing._add_browser_settings kotti_settings.testing._add_dict_settings'
   ... })
   >>> browser = tools['Browser']()
   >>> ctrl = browser.getControl
@@ -38,23 +38,24 @@ Get to the settings page and change some settings
   >>> 'type="text" name="kotti_settings.testing-teststringsetting" value="hello world"' in browser.contents
   True
 
-  >>> ctrl('String').value = 'hello you'
-  >>> ctrl('Ranged Int').value = 'nan'
-  >>> ctrl(name='save').click()
+
+  >>> ctrl(name='kotti_settings.testing-teststringsetting').value = 'hello you'
+  >>> ctrl(name='kotti_settings.testing-testrageintsetting').value = 'nan'
+  >>> ctrl(name='save', index=0).click()
   >>> 'There was a problem' in browser.contents
   True
   >>> '"nan" is not a number' in browser.contents
   True
 
-  >>> ctrl('Ranged Int').value = '23'
-  >>> ctrl(name='save').click()
+  >>> ctrl(name='kotti_settings.testing-testrageintsetting').value = '23'
+  >>> ctrl(name='save', index=0).click()
   >>> 'There was a problem' in browser.contents
   True
   >>> '23 is greater than maximum value 10' in browser.contents
   True
 
-  >>> ctrl('Ranged Int').value = '7'
-  >>> ctrl(name='save').click()
+  >>> ctrl(name='kotti_settings.testing-testrageintsetting').value = '7'
+  >>> ctrl(name='save', index=0).click()
   >>> 'type="text" name="kotti_settings.testing-testrageintsetting" value="7"' in browser.contents
   True
   >>> 'type="text" name="kotti_settings.testing-teststringsetting" value="hello you"' in browser.contents
@@ -62,7 +63,10 @@ Get to the settings page and change some settings
   >>> u"Successfully saved test settings." in browser.contents
   True
 
-  >>> ctrl(name='cancel').click()
+  >>> ctrl(name='cancel', index=0).click()
   >>> u"No changes made." in browser.contents
   True
 
+  >>> ctrl(name='save', index=1).click()
+  >>> 'type="text" name="kotti_settings.testing-testsetting_2" value="23"' in browser.contents
+  True

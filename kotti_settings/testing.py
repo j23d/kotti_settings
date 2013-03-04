@@ -7,8 +7,6 @@ def get_view(rens, name=None, title=None):
     for ren in rens:
         if name is not None and name == ren['view'].name:
             return ren
-        if title is not None and title == ren['view'].title:
-            return ren
     return rens[0]
 
 

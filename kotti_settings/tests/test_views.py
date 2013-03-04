@@ -24,10 +24,10 @@ def test_settingtab_with_dict(db_session, dummy_request):
                     name='test_settings_dict')
     assert view['view'].title == "Testsettings Dict"
     assert view['form'].startswith('<form')
-    assert 'name="test_views-testsetting_1"'\
+    assert 'name="kotti_settings.testing-testsetting_1"'\
         in view['form']
     assert 'value="my first string"' in view['form']
-    assert 'name="test_views-testsetting_2"'\
+    assert 'name="kotti_settings.testing-testsetting_2"'\
         in view['form']
     assert 'value="23"' in view['form']
 
@@ -49,20 +49,6 @@ def test_settingtab_with_schema(db_session, dummy_request):
     assert se in view['form']
     se = 'name="test_views-testrageintsetting" value="5"'
     assert se in view['form']
-
-
-def test_settingtab_multiple(db_session, dummy_request):
-    add_settings(TestSettingsDict)
-    add_settings(TestSettingsSchema)
-    root = get_root()
-    view = SettingsView(root, dummy_request)
-    assert type(view) == SettingsView
-
-    rendered = view.view()
-    assert 'settings_form_views' in rendered
-
-    import pdb;pdb.set_trace()
-
 
 
 def test_wrong_settings(db_session, dummy_request):
