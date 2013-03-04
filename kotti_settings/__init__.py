@@ -15,8 +15,10 @@ def kotti_configure(settings):
 
 def includeme(config):
 
-    #from kotti_settings.testing import _add_schema_settings
+    from kotti_settings.testing import _add_schema_settings
+    from kotti_settings.testing import _add_dict_settings
     #_add_schema_settings()
+    #_add_dict_settings()
 
     config.add_translation_dirs('kotti_settings:locale')
     config.scan(__name__)

@@ -2,12 +2,12 @@ import colander
 from kotti_settings.util import add_settings
 
 
-def get_form(rens, name=None, title=None):
-    """Get us the right form dictionary."""
+def get_view(rens, name=None, title=None):
+    """Get us the right view dictionary."""
     for ren in rens:
-        if name is not None and name == ren['name']:
+        if name is not None and name == ren['view'].name:
             return ren
-        if title is not None and title == ren['title']:
+        if title is not None and title == ren['view'].title:
             return ren
     return rens[0]
 
@@ -15,6 +15,7 @@ def get_form(rens, name=None, title=None):
 TestSettingsDict = {
     'name': 'test_settings_dict',
     'title': "Testsettings Dict",
+    'description': "Some settings in a dict.",
     'success_message': u"Successfully saved test settings.",
     'settings': [
         {'type': 'String',
@@ -33,6 +34,7 @@ TestSettingsDict = {
 TestWrongSettingsDict = {
     'name': 'test_settings_dict',
     'title': "Testsettings Dict",
+    'description': "Some wrong settings.",
     'success_message': u"Successfully saved test settings.",
     'settings': [
         {'type': 'Something',
@@ -63,6 +65,7 @@ class TestSchema(colander.MappingSchema):
 TestSettingsSchema = {
     'name': 'test_settings_schema',
     'title': "Testsettings Schema",
+    'description': "Some settings in a schema.",
     'success_message': u"Successfully saved test settings.",
     'schema_factory': TestSchema
 }
@@ -75,6 +78,7 @@ class TestSchemaBrowser(colander.MappingSchema):
 TestSettingsSchemaBrowser = {
     'name': 'test_settings_schema_browser',
     'title': "Testsettings Schema",
+    'description': "Some settings in a schema.",
     'success_message': u"Successfully saved test settings.",
     'schema_factory': TestSchemaBrowser
 }

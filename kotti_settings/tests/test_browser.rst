@@ -31,6 +31,8 @@ Get to the settings page and change some settings
 
   >>> 'Testsettings Schema' in browser.contents
   True
+  >>> 'Some settings in a schema.' in browser.contents
+  True
   >>> 'type="text" name="kotti_settings.testing-testrageintsetting" value="5"' in browser.contents
   True
   >>> 'type="text" name="kotti_settings.testing-teststringsetting" value="hello world"' in browser.contents

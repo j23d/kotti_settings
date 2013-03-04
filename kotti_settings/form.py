@@ -39,6 +39,7 @@ class SettingsFormView(FormView):
     form_class = SettingsForm
     name = 'settings'
     title = _(u"Settings")
+    description = u""
     buttons = (
         deform.Button('save', _(u'Save')),
         deform.Button('cancel', _(u'Cancel')))

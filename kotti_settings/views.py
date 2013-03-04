@@ -29,6 +29,7 @@ class SettingsView(object):
             view_name = "%s-%s" % (settings.module, settings.name)
             View = type(view_name, (SettingsFormView,), {
                 'title': settings.title,
+                'description': settings.description,
                 'name': settings.name,
                 'schema_factory': settings.schema_factory,
                 'settings': settings,
@@ -36,7 +37,6 @@ class SettingsView(object):
             })
             view = View(self.context, self.request)
             dikt = view()
-            dikt['title'] = view.tab_title()  # aehm - no
-            dikt['name'] = settings.name  # aehm - don't know
+            dikt['view'] = view
             settings_form_views.append(dikt)
         return {'settings_form_views': settings_form_views, }

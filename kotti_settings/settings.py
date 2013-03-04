@@ -9,6 +9,7 @@ class ModuleSettings(object):
         self.module = None
         self.name = None
         self.title = None
+        self.description = None
         self.success_message = u''
         self.settings = []
         self.schema_factory = None
