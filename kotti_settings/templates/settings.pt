@@ -19,13 +19,13 @@
       </tal:navpoint>
     </ul>
 
-
     <div class="tab-content">
       <tal:repeat tal:repeat="view settings_form_views">
         <div tal:define="index repeat.view.index;
                          str_index str(index);
-                         tab_id string:settings-${str_index}-tab"
-             class="tab-pane ${tab_id and 'active'}"
+                         tab_id string:settings-${str_index}-tab;
+                         active index == 0 and ' active' or ''"
+             class="tab-pane${active}"
              id="${tab_id}">
              <span>${view['view'].description}</span>
           <form tal:replace="structure settings_form_views[index]['form']" />

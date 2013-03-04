@@ -15,12 +15,5 @@ def kotti_configure(settings):
 
 def includeme(config):
 
-    from kotti_settings.testing import TestSettingsDict
-    from kotti_settings.testing import TestSettingsSchema
-    from kotti_settings.testing import TestSettingsSchemaBrowser
-    # add_settings(TestSettingsSchema)
-    # add_settings(TestSettingsDict)
-    # add_settings(TestSettingsSchemaBrowser)
-
     config.add_translation_dirs('kotti_settings:locale')
     config.scan(__name__)
