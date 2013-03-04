@@ -7,6 +7,7 @@ from pyramid_deform import CSRFSchema
 from pyramid_deform import FormView
 from pyramid.httpexceptions import HTTPFound
 
+from kotti_settings.config import SETTINGS
 from kotti_settings.util import get_settings
 from kotti_settings import _
 
@@ -30,7 +31,6 @@ class SettingsForm(deform.form.Form):
         for key in settings.keys():
             if key not in keys:
                 controls.append((key, str(settings[key])))
-        from kotti_settings.config import SETTINGS
         for settings in SETTINGS:
             for obj in settings.settings_objs:
                 if obj.field_name not in keys:
@@ -107,8 +107,8 @@ class SettingsFormView(FormView):
         raise TypeError("%s is not a class." % name)  # pragma: no cover
 
     def save_success(self, appstruct):
-        settings = get_settings()
         # https://github.com/Kotti/Kotti/commit/ca7db42711c9e29cb797dad95de0898eb598b72e
+        settings = get_settings()
         appstruct.pop('csrf_token', None)
         for item in appstruct:
             if appstruct[item]:
