@@ -30,6 +30,17 @@ TestSettingsDict = {
     ]
 }
 
+TestWrongSettingsDict = {
+    'name': 'test_settings_dict',
+    'title': "Testsettings Dict",
+    'success_message': u"Successfully saved test settings.",
+    'settings': [
+        {'type': 'Something',
+         'name': 'something',
+         'title': 'Something', },
+    ]
+}
+
 
 class StringSchemaNode(colander.SchemaNode):
     name = 'teststringsetting'

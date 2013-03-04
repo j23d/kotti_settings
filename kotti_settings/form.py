@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys
 import colander
-from deform import Button
+import deform
 from types import ClassType
 from pyramid_deform import CSRFSchema
 from pyramid_deform import FormView
@@ -12,22 +12,42 @@ from kotti_settings import _
 
 
 class SettingsSchema(colander.MappingSchema):
+    """An empty schema to have a named one if needed.
+    """
     pass
+
+
+class SettingsForm(deform.form.Form):
+    """Override the form class to take multiple forms in one
+       request into account. Every time a form on the settings
+       page is saved, all forms will be validated with the current
+       POST values, what are only the ones for the submitted form.
+    """
+
+    def validate(self, controls, subcontrol=None):
+        settings = get_settings()
+        keys = [c[0] for c in controls]
+        for key in settings.keys():
+            if key not in keys:
+                controls.append((key, str(settings[key])))
+        return super(SettingsForm, self).validate(controls, subcontrol)
 
 
 class SettingsFormView(FormView):
     """The form template class for one setting tab.
     """
+    form_class = SettingsForm
     name = 'settings'
     title = _(u"Settings")
     buttons = (
-        Button('save', _(u'Save')),
-        Button('cancel', _(u'Cancel')))
+        deform.Button('save', _(u'Save')),
+        deform.Button('cancel', _(u'Cancel')))
     success_message = _(u"Your changes have been saved.")
-    # success_url = None
+    success_url = None
     settings = None
     schema_factory = None
     use_csrf_token = True
+    use_ajax = True
 
     def tab_title(self):
         return self.title
@@ -38,8 +58,7 @@ class SettingsFormView(FormView):
         self.__dict__.update(kwargs)
 
     def __call__(self):
-        """get the settings - this should be done with some
-           failure proof util method
+        """Build up the schema and return the form view.
         """
         # build the schema if it not exist
         if self.schema is None:
@@ -66,8 +85,7 @@ class SettingsFormView(FormView):
                 continue
             if not child.name.startswith(self.settings.module):
                 child.name = "%s-%s" % (self.settings.module, child.name)
-        result = super(SettingsFormView, self).__call__()
-        return result
+        return super(SettingsFormView, self).__call__()
 
     def before(self, form):
         settings = get_settings()
@@ -83,7 +101,7 @@ class SettingsFormView(FormView):
             raise NameError("%s is not an sqlalchemy data type." % name)
         if isinstance(klass, (ClassType, type)):
             return klass
-        raise TypeError("%s is not a class." % name)
+        raise TypeError("%s is not a class." % name)  # pragma: no cover
 
     def save_success(self, appstruct):
         settings = get_settings()
@@ -92,10 +110,12 @@ class SettingsFormView(FormView):
         for item in appstruct:
             if appstruct[item]:
                 settings[item] = appstruct[item]
+        ses = self.request.session
+        if not '_f_success' in ses or\
+            not self.success_message in ses['_f_success']:
+                self.request.session.flash(self.success_message, 'success')
 
     def cancel_success(self, appstruct):
         self.request.session.flash(_(u'No changes made.'), 'info')
-        location = "%s/@@settings" % self.request.application_url
+        location = "%s@@settings" % self.request.resource_url(self.context)
         raise HTTPFound(location=location)
-
-    cancel_failure = cancel_success
