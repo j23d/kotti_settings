@@ -1,3 +1,4 @@
+import pytest
 from kotti.resources import get_root
 
 from kotti_settings.views import SettingsView
@@ -6,6 +7,7 @@ from kotti_settings.util import add_settings
 from kotti_settings.testing import get_form
 from kotti_settings.testing import TestSettingsDict
 from kotti_settings.testing import TestSettingsSchema
+from kotti_settings.testing import TestWrongSettingsDict
 
 
 def test_settingtab_with_dict(db_session, dummy_request):
@@ -47,3 +49,14 @@ def test_settingtab_with_schema(db_session, dummy_request):
     assert se in form['form']
     se = 'name="test_views-testrageintsetting" value="5"'
     assert se in form['form']
+
+
+def test_wrong_settings(db_session, dummy_request):
+    add_settings(TestWrongSettingsDict)
+
+    root = get_root()
+    view = SettingsView(root, dummy_request)
+    assert type(view) == SettingsView
+
+    with pytest.raises(NameError):
+        view.view()

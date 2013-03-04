@@ -57,3 +57,10 @@ Get to the settings page and change some settings
   True
   >>> 'type="text" name="kotti_settings.testing-teststringsetting" value="hello you"' in browser.contents
   True
+  >>> u"Successfully saved test settings." in browser.contents
+  True
+
+  >>> ctrl(name='cancel').click()
+  >>> u"No changes made." in browser.contents
+  True
+
