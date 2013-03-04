@@ -17,7 +17,6 @@ you setup Fanstatic) section could then look like this::
 
     kotti.configurators = kotti_settings.kotti_configure
 
-
 The add-on adds a new configuration page to save settings for your module or
 accross different modules. It adds a new submenupoint named "Settings" to the
 menupoint "Site Setup". Every setting collection is presented in one tab. It
@@ -43,6 +42,7 @@ Define your settings in a dictionary
 	TestSettings = {
         'name': 'test_settings',
         'title': "Testsettings",
+        'description': "Some description for my settings",
         'success_message': u"Successfully saved test settings.",
         'settings': [
             {'type': 'String',
@@ -85,6 +85,7 @@ Define your settings with a schema
     TestSettings = {
         'name': 'test_settings',
         'title': "Testsettings",
+        'description': "Some description for my settings",
         'success_message': u"Successfully saved test settings.",
         'schema_factory': TestSchema
     }
