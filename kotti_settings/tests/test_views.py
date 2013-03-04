@@ -51,6 +51,20 @@ def test_settingtab_with_schema(db_session, dummy_request):
     assert se in view['form']
 
 
+def test_settingtab_multiple(db_session, dummy_request):
+    add_settings(TestSettingsDict)
+    add_settings(TestSettingsSchema)
+    root = get_root()
+    view = SettingsView(root, dummy_request)
+    assert type(view) == SettingsView
+
+    rendered = view.view()
+    assert 'settings_form_views' in rendered
+
+    import pdb;pdb.set_trace()
+
+
+
 def test_wrong_settings(db_session, dummy_request):
     add_settings(TestWrongSettingsDict)
 
