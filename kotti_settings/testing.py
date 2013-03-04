@@ -2,14 +2,6 @@ import colander
 from kotti_settings.util import add_settings
 
 
-def get_view(rens, name=None, title=None):
-    """Get us the right view dictionary."""
-    for ren in rens:
-        if name is not None and name == ren['view'].name:
-            return ren
-    return rens[0]
-
-
 TestSettingsDict = {
     'name': 'test_settings_dict',
     'title': "Testsettings Dict",
@@ -82,13 +74,6 @@ TestSettingsSchemaBrowser = {
 }
 
 
-def _add_schema_settings():
-    add_settings(TestSettingsSchema)
-
-
-def _add_dict_settings():
-    add_settings(TestSettingsDict)
-
-
 def _add_browser_settings():
     add_settings(TestSettingsSchemaBrowser)
+    add_settings(TestSettingsDict)
