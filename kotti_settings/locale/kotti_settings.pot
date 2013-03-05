@@ -1,0 +1,39 @@
+# Translations template for kotti_settings.
+# Copyright (C) 2013 ORGANIZATION
+# This file is distributed under the same license as the kotti_settings project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: kotti_settings 0.1a1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2013-03-05 17:20+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
+
+#: kotti_settings/__init__.py:12 kotti_settings/form.py:46
+msgid "Settings"
+msgstr ""
+
+#: kotti_settings/form.py:49
+msgid "Save"
+msgstr ""
+
+#: kotti_settings/form.py:50
+msgid "Cancel"
+msgstr ""
+
+#: kotti_settings/form.py:51
+msgid "Your changes have been saved."
+msgstr ""
+
+#: kotti_settings/form.py:122
+msgid "No changes made."
+msgstr ""
+
