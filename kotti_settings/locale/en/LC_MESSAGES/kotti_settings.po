@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kotti_settings 0.1a1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-03-05 17:20+0100\n"
+"POT-Creation-Date: 2013-03-05 17:29+0100\n"
 "PO-Revision-Date: 2013-03-05 17:22+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Generated-By: Babel 0.9.6\n"
 
 #: kotti_settings/__init__.py:12 kotti_settings/form.py:46
+#: kotti_settings/templates/settings.pt:7
 msgid "Settings"
 msgstr "Settings"
 
@@ -37,4 +38,8 @@ msgstr "Your changes have been saved."
 #: kotti_settings/form.py:122
 msgid "No changes made."
 msgstr "No changes made."
+
+#: kotti_settings/templates/settings.pt:8
+msgid "Here you find can adjust the settings of the add-ons."
+msgstr "Here you find can adjust the settings of the add-ons."
 
