@@ -32,10 +32,7 @@ title for your tab, what are required. Optional arguments are success_message,
 either settings or schema, schema_factory and use_csrf_token.
 
 
-Define your settings in a dictionary
-------------------------------------
-
-.. code-block:: python
+Define your settings in a dictionary:::
 
 	from kotti_settings.util import add_settings
 
@@ -54,19 +51,14 @@ Define your settings in a dictionary
              'name': 'testsetting_2',
              'title': 'Test 2',
              'description': 'again a test setting',
-             'default': 23, }
-        ]
-    }
+             'default': 23, }]}
     add_settings(TestSettings)
 
 
-Define your settings with a schema
-----------------------------------
+Define your settings with a schema:::
 
-.. code-block:: python
-
-  kotti_mysite_js = Resource(library, "script.js")
 	from kotti_settings.util import add_settings
+
     class StringSchemaNode(colander.SchemaNode):
         name = 'a_string'
         title = 'hello'
