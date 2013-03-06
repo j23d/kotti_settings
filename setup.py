@@ -4,7 +4,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 project = 'kotti_settings'
-version = '0.1'
+version = '0.1a1'
 
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
@@ -13,7 +13,7 @@ CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 setup(
     name=project,
     version=version,
-    description="abc content type for Kotti",
+    description="Settings configuration for Kotti",
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
         "Environment :: Web Environment",
@@ -28,7 +28,7 @@ setup(
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Software Development :: User Interfaces",
     ],
-    keywords='kotti theme',
+    keywords='kotti ui settings cms pyramid pylons',
     author='Marco Scheidhuber',
     author_email='j23d@jusid.de',
     url='https://github.com/j23d/kotti_settings',
