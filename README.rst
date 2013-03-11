@@ -84,6 +84,12 @@ Define your settings with a schema:::
     add_settings(TestSettings)
 
 
+To get your setting back into your code you use the following:::
+
+    from kotti_settings.util import get_setting
+    first_test_setting = get_setting('test_setting_1')
+
+
 The state of this software is alpha, so it should only be used in development
 environments. Comments, thoughts and patches are highly welcome.
 
