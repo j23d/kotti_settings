@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1a2(Unreleased)
+0.1a2(2013-03-11)
 -----------------
 
 * Added util method get_setting as default way to get a setting.
