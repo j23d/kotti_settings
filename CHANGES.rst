@@ -4,6 +4,7 @@ Changelog
 0.1(Unreleased)
 ---------------
 
+* Only take the module name itself into account for the setting name.
 
 
 0.1a2(2013-03-11)

@@ -33,32 +33,32 @@ Get to the settings page and change some settings
   True
   >>> 'Some settings in a schema.' in browser.contents
   True
-  >>> 'type="text" name="kotti_settings.testing-testrageintsetting" value="5"' in browser.contents
+  >>> 'type="text" name="kotti_settings-testrageintsetting" value="5"' in browser.contents
   True
-  >>> 'type="text" name="kotti_settings.testing-teststringsetting" value="hello world"' in browser.contents
+  >>> 'type="text" name="kotti_settings-teststringsetting" value="hello world"' in browser.contents
   True
 
 
-  >>> ctrl(name='kotti_settings.testing-teststringsetting').value = 'hello you'
-  >>> ctrl(name='kotti_settings.testing-testrageintsetting').value = 'nan'
+  >>> ctrl(name='kotti_settings-teststringsetting').value = 'hello you'
+  >>> ctrl(name='kotti_settings-testrageintsetting').value = 'nan'
   >>> ctrl(name='save', index=0).click()
   >>> 'There was a problem' in browser.contents
   True
   >>> '"nan" is not a number' in browser.contents
   True
 
-  >>> ctrl(name='kotti_settings.testing-testrageintsetting').value = '23'
+  >>> ctrl(name='kotti_settings-testrageintsetting').value = '23'
   >>> ctrl(name='save', index=0).click()
   >>> 'There was a problem' in browser.contents
   True
   >>> '23 is greater than maximum value 10' in browser.contents
   True
 
-  >>> ctrl(name='kotti_settings.testing-testrageintsetting').value = '7'
+  >>> ctrl(name='kotti_settings-testrageintsetting').value = '7'
   >>> ctrl(name='save', index=0).click()
-  >>> 'type="text" name="kotti_settings.testing-testrageintsetting" value="7"' in browser.contents
+  >>> 'type="text" name="kotti_settings-testrageintsetting" value="7"' in browser.contents
   True
-  >>> 'type="text" name="kotti_settings.testing-teststringsetting" value="hello you"' in browser.contents
+  >>> 'type="text" name="kotti_settings-teststringsetting" value="hello you"' in browser.contents
   True
   >>> u"Successfully saved test settings." in browser.contents
   True
@@ -68,5 +68,5 @@ Get to the settings page and change some settings
   True
 
   >>> ctrl(name='save', index=1).click()
-  >>> 'type="text" name="kotti_settings.testing-testsetting_2" value="23"' in browser.contents
+  >>> 'type="text" name="kotti_settings-testsetting_2" value="23"' in browser.contents
   True

@@ -10,8 +10,11 @@ from kotti_settings.settings import SettingObj
 def get_setting(name, not_found=None):
     frame = inspect.stack()[1]
     module = inspect.getmodule(frame[0])
-    if not name.startswith(module.__name__):
-        name = '{0}-{1}'.format(module.__name__, name)
+    modname = module.__name__
+    if '.' in modname:
+        modname = modname[:modname.find('.')]
+    if not name.startswith(modname):
+        name = '{0}-{1}'.format(modname, name)
     settings = get_settings()
     if name in settings:
         return settings[name]
@@ -34,7 +37,10 @@ def add_settings(module_settings):
         # If the module name is omitted: get it
         frame = inspect.stack()[1]
         module = inspect.getmodule(frame[0])
-        module_settings.module = module.__name__
+        modname = module.__name__
+        if '.' in modname:
+            modname = modname[:modname.find('.')]
+        module_settings.module = modname
     for setting in module_settings.settings:
         setting_obj = SettingObj(**setting)
         # name and title of a setting is required
