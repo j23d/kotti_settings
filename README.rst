@@ -31,10 +31,7 @@ A setting tab is set up with with a dictionary. Here you define a name and a
 title for your tab, what are required. Optional arguments are success_message,
 either settings or schema, schema_factory and use_csrf_token.
 
-
 Define your settings in a dictionary:::
-
-	from kotti_settings.util import add_settings
 
 	TestSettings = {
         'name': 'test_settings',
@@ -52,12 +49,8 @@ Define your settings in a dictionary:::
              'title': 'Test 2',
              'description': 'again a test setting',
              'default': 23, }]}
-    add_settings(TestSettings)
-
 
 Define your settings with a schema:::
-
-	from kotti_settings.util import add_settings
 
     class StringSchemaNode(colander.SchemaNode):
         name = 'a_string'
@@ -81,16 +74,35 @@ Define your settings with a schema:::
         'success_message': u"Successfully saved test settings.",
         'schema_factory': TestSchema
     }
-    add_settings(TestSettings)
+
+
+To get your configuration registered within ``kotti_settings`` add the
+settings in a populator in your add-on. Have a look to the Kotti documentation
+to get more informations for populators_ and to see an example_.
+
+
+Add your settings configuration within a populator, e.g. in a file named populate.py:::
+
+    def populate():
+        from kotti_settings.util import add_settings
+        add_settings(TestSettings)
+
+and add this to your configuration:::
+
+    def kotti_configure(settings):
+        settings['kotti.populators'] += ' my_addon.populate.populate'
+
+or directly to your ini file:::
+
+    kotti.populators = my_addon.populate.populate
 
 
 To get your setting back into your code you use the following:::
 
     from kotti_settings.util import get_setting
+
     first_test_setting = get_setting('test_setting_1')
 
-
-The state of this software is alpha, so it should only be used in development
-environments. Comments, thoughts and patches are highly welcome.
-
 .. _Find out more about Kotti: http://pypi.python.org/pypi/Kotti
+.. _populators: http://kotti.readthedocs.org/en/latest/developing/configuration.html#kotti-populators
+.. _example: http://kotti.readthedocs.org/en/latest/developing/frontpage-different-template.html
