@@ -50,3 +50,12 @@ def test_get_setting(db_session, root):
     assert first == 'first test string'
     second = get_setting('test_util-second_test_setting')
     assert second == 5
+
+
+def test_get_setting_not_found(db_session, root):
+    from kotti_settings.util import get_setting
+
+    setting = get_setting('not_exiting_setting')
+    assert setting == None
+    setting = get_setting('not_exiting_setting', 'default')
+    assert setting == 'default'

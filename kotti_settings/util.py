@@ -12,7 +12,7 @@ def get_setting(name, not_found=None):
     module = inspect.getmodule(frame[0])
     modname = module.__name__
     if '.' in modname:
-        modname = modname[:modname.find('.')]
+        modname = modname[:modname.find('.')]  # pragma: no cover
     if not name.startswith(modname):
         name = '{0}-{1}'.format(modname, name)
     settings = get_settings()
