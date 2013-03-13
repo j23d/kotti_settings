@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.1(Unreleased)
----------------
+0.1a3(2013-03-13)
+-----------------
 
 * Only take the module name itself into account for the setting name.
 
