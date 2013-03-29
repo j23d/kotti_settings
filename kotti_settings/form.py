@@ -8,6 +8,8 @@ from pyramid_deform import FormView
 from pyramid.httpexceptions import HTTPFound
 
 from kotti_settings.config import SETTINGS
+from kotti_settings.events import SettingsAfterSave
+from kotti_settings.events import SettingsBeforeSave
 from kotti_settings.util import get_settings
 from kotti_settings import _
 
@@ -110,6 +112,11 @@ class SettingsFormView(FormView):
         # https://github.com/Kotti/Kotti/commit/ca7db42711c9e29cb797dad95de0898eb598b72e
         settings = get_settings()
         appstruct.pop('csrf_token', None)
+        module = None
+        if appstruct:
+            key = appstruct.keys()[0]
+            module = key[:key.find('-')]
+        self.request.registry.notify(SettingsBeforeSave(module))
         for item in appstruct:
             if appstruct[item]:
                 settings[item] = appstruct[item]
@@ -117,6 +124,7 @@ class SettingsFormView(FormView):
         if not '_f_success' in ses or\
             not self.success_message in ses['_f_success']:
                 self.request.session.flash(self.success_message, 'success')
+        self.request.registry.notify(SettingsAfterSave(module))
 
     def cancel_success(self, appstruct):
         self.request.session.flash(_(u'No changes made.'), 'info')

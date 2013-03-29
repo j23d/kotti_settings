@@ -103,6 +103,20 @@ To get your setting back into your code you use the following:::
 
     first_test_setting = get_setting('test_setting_1')
 
+Before and after the settings are saved events for handling the changes are fired. To subscribe
+to the events use something like::
+
+    from pyramid.events import subscriber
+    from kotti_settings.events import SettingsAfterSave
+
+    @subscriber(SettingsAfterSave)
+    def do_something_when_settings_saved(event):
+        # Check if the settings for this module was saved.
+        if not event.module == __package__:
+            return
+        my_fancy_thing()
+
+
 .. _Find out more about Kotti: http://pypi.python.org/pypi/Kotti
 .. _populators: http://kotti.readthedocs.org/en/latest/developing/configuration.html#kotti-populators
 .. _example: http://kotti.readthedocs.org/en/latest/developing/frontpage-different-template.html

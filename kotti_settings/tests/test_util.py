@@ -48,7 +48,7 @@ def test_get_setting(db_session, root):
 
     first = get_setting('first_test_setting')
     assert first == 'first test string'
-    second = get_setting('test_util-second_test_setting')
+    second = get_setting('kotti_settings-second_test_setting')
     assert second == 5
 
 

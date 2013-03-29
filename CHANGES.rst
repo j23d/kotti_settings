@@ -4,6 +4,8 @@ Changelog
 0.1b1(Unreleased)
 -----------------
 
+* Added event handling for callbacks before and after the settings are saved.
+
 
 0.1a3(2013-03-13)
 -----------------

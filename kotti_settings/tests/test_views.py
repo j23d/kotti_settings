@@ -26,10 +26,10 @@ def test_settingtab_with_dict(db_session, dummy_request):
 
     assert view['view'].title == "Testsettings Dict"
     assert view['form'].startswith('<form')
-    assert 'name="test_views-testsetting_1"'\
+    assert 'name="kotti_settings-testsetting_1"'\
         in view['form']
     assert 'value="my first string"' in view['form']
-    assert 'name="test_views-testsetting_2"'\
+    assert 'name="kotti_settings-testsetting_2"'\
         in view['form']
     assert 'value="23"' in view['form']
 
@@ -50,9 +50,9 @@ def test_settingtab_with_schema(db_session, dummy_request):
 
     assert view['view'].title == "Testsettings Schema"
     assert view['form'].startswith('<form')
-    se = 'name="test_views-teststringsetting" value="hello world"'
+    se = 'name="kotti_settings-teststringsetting" value="hello world"'
     assert se in view['form']
-    se = 'name="test_views-testrageintsetting" value="5"'
+    se = 'name="kotti_settings-testrageintsetting" value="5"'
     assert se in view['form']
 
 
