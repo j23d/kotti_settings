@@ -1,0 +1,4 @@
+Todo
+----
+
+* Only save the settings from the submitted form.
