@@ -1,6 +1,8 @@
 import inspect
 
 from kotti.resources import get_root
+from kotti.views.slots import objectevent_listeners
+from kotti.views.slots import slot_events
 
 from kotti_settings.config import SETTINGS
 from kotti_settings.settings import ModuleSettings
@@ -55,3 +57,18 @@ def add_settings(module_settings):
         settings[setting_obj.field_name] = default
         module_settings.settings_objs.append(setting_obj)
     SETTINGS.append(module_settings)
+
+
+def remove_from_slots(widget):
+    """Check all slots if a widget is already set and remove it
+       from the listener.
+    """
+    for slot_event in slot_events:
+        try:
+            listener = objectevent_listeners[(slot_event, None)]
+        except TypeError:
+            listener = None
+        if listener is not None:
+            for func in listener:
+                if func.func_closure[1].cell_contents == widget:
+                    listener.remove(func)
