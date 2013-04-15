@@ -4,6 +4,9 @@ Changelog
 0.1b2(Unreleased)
 -----------------
 
+* Added possibility to remove a widget from the slots.
+* Added two default schemas, one to select the slot for the widget and one
+  to set where to show the widget.
 
 
 0.1b1(2013-03-29)
