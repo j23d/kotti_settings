@@ -59,3 +59,23 @@ def test_get_setting_not_found(db_session, root):
     assert setting == None
     setting = get_setting('not_exiting_setting', 'default')
     assert setting == 'default'
+
+
+def test_remove_widget_from_slot(config, db_session, events,
+                                 dummy_request, root):
+    from pyramid.response import Response
+    from kotti.views.slots import assign_slot
+    from kotti.views.util import TemplateAPI
+    from kotti_settings.util import remove_from_slots
+
+    def a_widget(request):
+        return Response(u"The widget speaks")
+    config.add_view(a_widget, name='a-widget')
+    assign_slot('a-widget', 'right')
+
+    api = TemplateAPI(root, dummy_request)
+    assert api.slots.right == [u"The widget speaks"]
+
+    remove_from_slots('a-widget')
+    api = TemplateAPI(root, dummy_request)
+    assert api.slots.right == []
