@@ -66,7 +66,7 @@ def remove_from_slots(widget):
     for slot_event in slot_events:
         try:
             listener = objectevent_listeners[(slot_event, None)]
-        except TypeError:
+        except TypeError:  # pragma: no cover
             listener = None
         if listener is not None:
             for func in listener:
