@@ -1,5 +1,6 @@
 import inspect
 
+from kotti import DBSession
 from kotti.resources import get_root
 from kotti.views.slots import objectevent_listeners
 from kotti.views.slots import slot_events
@@ -72,3 +73,4 @@ def remove_from_slots(widget):
             for func in listener:
                 if func.func_closure[1].cell_contents == widget:
                     listener.remove(func)
+    DBSession.flush()
