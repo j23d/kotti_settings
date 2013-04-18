@@ -62,7 +62,9 @@ def add_settings(mod_settings):
     if module_settings.schema_factory:
         schema = module_settings.schema_factory()
         for child in schema.children:
-            field_name = "%s-%s" % (module_settings.module, child.name)
+            field_name = child.name
+            if not field_name.startswith(module_settings.module):
+                field_name = u"%s-%s" % (module_settings.module, child.name)
             value = None
             if child.default is not colander.null:
                 value = child.default
