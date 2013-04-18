@@ -70,5 +70,7 @@ def remove_from_slots(widget):
             listener = None
         if listener is not None:
             for func in listener:
-                if func.func_closure[1].cell_contents == widget:
-                    listener.remove(func)
+                for closure in func.func_closure:
+                    if closure.cell_contents == widget:
+                        listener.remove(func)
+                        break
