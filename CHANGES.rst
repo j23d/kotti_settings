@@ -4,7 +4,7 @@ Changelog
 0.1dev(Unreleased)
 ------------------
 
-
+* Fix: Settings defined in a schema also have to be initialized.
 
 0.1b2(2013-04-18)
 -----------------
