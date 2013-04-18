@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1b2(Unreleased)
+0.1b2(2013-04-18)
 -----------------
 
 * Added possibility to remove a widget from the slots.
