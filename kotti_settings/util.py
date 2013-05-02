@@ -87,3 +87,15 @@ def remove_from_slots(widget):
                     if closure.cell_contents == widget:
                         listener.remove(func)
                         break
+
+
+def show_in_context(setting, context):
+    """Check if the the item should be shown in the given context."""
+    show = False
+    if setting == u'everywhere':
+        show = True
+    elif setting == u'only on root':
+        show = context == get_root()
+    elif setting == u'not on root':
+        show = context != get_root()
+    return show

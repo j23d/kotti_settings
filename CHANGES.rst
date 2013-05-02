@@ -4,6 +4,8 @@ Changelog
 0.1b4(Unreleased)
 -----------------
 
+* Added a helper method for one of the default setting schemas.
+
 
 0.1b3(2013-04-18)
 ------------------
