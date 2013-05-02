@@ -1,3 +1,9 @@
+kotti_settings |Build Status|_
+******************************
+
+.. |Build Status| image:: https://travis-ci.org/j23d/kotti_settings
+.. _`Build Status`: https://travis-ci.org/j23d/kotti_settings
+
 ==============
 kotti_settings
 ==============
