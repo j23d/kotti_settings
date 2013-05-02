@@ -6,6 +6,7 @@ Changelog
 
 * Added a helper method for one of the default setting schemas.
 * Only save the settings from the submitted form.
+* Set the saved form as the active one.
 
 
 0.1b3(2013-04-18)

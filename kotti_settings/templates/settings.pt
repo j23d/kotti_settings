@@ -13,7 +13,7 @@
       <tal:navpoint tal:repeat="view settings_form_views">
         <li tal:define="index repeat.view.index;
                         str_index str(index);"
-             class="${index == 0 and 'active'}">
+             class="${view.view.active and 'active'}">
           <a href="#settings-${str_index}-tab" data-toggle="tab" i18n:translate="">${view['view'].title}</a>
         </li>
       </tal:navpoint>
@@ -24,7 +24,7 @@
         <div tal:define="index repeat.view.index;
                          str_index str(index);
                          tab_id string:settings-${str_index}-tab;
-                         active index == 0 and ' active' or ''"
+                         active view.view.active and ' active' or ''"
              class="tab-pane${active}"
              id="${tab_id}">
              <span>${view['view'].description}</span>

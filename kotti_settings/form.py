@@ -56,6 +56,7 @@ class SettingsFormView(FormView):
     schema_factory = None
     use_csrf_token = True
     use_ajax = True
+    active = False
 
     def __init__(self, context, request, **kwargs):
         self.context = context

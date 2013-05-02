@@ -24,7 +24,7 @@ class SettingsView(object):
     def view(self):
         settings_form_views = []
 
-        for settings in SETTINGS:
+        for i, settings in enumerate(SETTINGS):
             # create settings forms
             view_name = "%s-%s" % (settings.module, settings.name)
             View = type(view_name, (SettingsFormView,), {
@@ -34,6 +34,7 @@ class SettingsView(object):
                 'schema_factory': settings.schema_factory,
                 'settings': settings,
                 'success_message': settings.success_message,
+                'active': i == 0,
             })
             view = View(self.context, self.request)
             dikt = view()
