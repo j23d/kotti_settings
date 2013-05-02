@@ -118,7 +118,7 @@ class SettingsFormView(FormView):
             module = key[:key.find('-')]
         self.request.registry.notify(SettingsBeforeSave(module))
         for item in appstruct:
-            if appstruct[item]:
+            if appstruct[item] is not None:
                 settings[item] = appstruct[item]
         ses = self.request.session
         if not '_f_success' in ses or\
