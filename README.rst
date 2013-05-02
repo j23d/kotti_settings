@@ -5,7 +5,6 @@ kotti_settings
 Add a settings configuration to your Kotti site.
 
 |Build Status|_
-***************
 .. |Build Status| image:: https://travis-ci.org/j23d/kotti_settings.png
 .. _`Build Status`: https://travis-ci.org/j23d/kotti_settings
 
