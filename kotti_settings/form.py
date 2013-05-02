@@ -97,6 +97,7 @@ class SettingsFormView(FormView):
         for key in form.cstruct:
             if key in settings:
                 form.cstruct[key] = settings[key]
+        form.formid = self.settings.module
 
     def colander_type(self, name):
         # http://docs.pylonsproject.org/projects/colander/en/latest/api.html#types
@@ -109,22 +110,25 @@ class SettingsFormView(FormView):
         raise TypeError("%s is not a class." % name)  # pragma: no cover
 
     def save_success(self, appstruct):
-        # https://github.com/Kotti/Kotti/commit/ca7db42711c9e29cb797dad95de0898eb598b72e
         settings = get_settings()
-        appstruct.pop('csrf_token', None)
-        module = None
-        if appstruct:
-            key = appstruct.keys()[0]
-            module = key[:key.find('-')]
-        self.request.registry.notify(SettingsBeforeSave(module))
-        for item in appstruct:
-            if appstruct[item] is not None:
-                settings[item] = appstruct[item]
-        ses = self.request.session
-        if not '_f_success' in ses or\
-            not self.success_message in ses['_f_success']:
-                self.request.session.flash(self.success_message, 'success')
-        self.request.registry.notify(SettingsAfterSave(module))
+        formid = self.request.POST.get('__formid__', None)
+        self.active = False
+        if formid is not None and formid == self.settings.module:
+            self.active = True
+            appstruct.pop('csrf_token', None)
+            module = None
+            if appstruct:
+                key = appstruct.keys()[0]
+                module = key[:key.find('-')]
+            self.request.registry.notify(SettingsBeforeSave(module))
+            for item in appstruct:
+                if appstruct[item] is not None:
+                    settings[item] = appstruct[item]
+            ses = self.request.session
+            if not '_f_success' in ses or\
+                not self.success_message in ses['_f_success']:
+                    self.request.session.flash(self.success_message, 'success')
+            self.request.registry.notify(SettingsAfterSave(module))
 
     def cancel_success(self, appstruct):
         self.request.session.flash(_(u'No changes made.'), 'info')
