@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1b4(Unreleased)
+0.1b4(2013-05-02)
 -----------------
 
 * Added a helper method for one of the default setting schemas.
