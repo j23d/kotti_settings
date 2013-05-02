@@ -2,5 +2,4 @@ Todo
 ----
 
 [x] Only save the settings from the submitted form.
-[ ] Settings form for settings to choose the layout. (Top tabs vs. tabs on the left site.)
 [ ] Add default schemas to the readme.
