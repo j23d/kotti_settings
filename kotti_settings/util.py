@@ -72,11 +72,14 @@ def add_settings(mod_settings):
     SETTINGS.append(module_settings)
 
 
-def remove_from_slots(widget):
+def remove_from_slots(widget, slot=None):
     """Check all slots if a widget is already set and remove it
        from the listener.
     """
     for slot_event in slot_events:
+        if slot is not None:
+            if slot != slot_event.name:
+                continue
         try:
             listener = objectevent_listeners[(slot_event, None)]
         except TypeError:  # pragma: no cover
