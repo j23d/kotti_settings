@@ -100,3 +100,18 @@ def test_remove_widget_from_one_slot(config, db_session, events,
     remove_from_slots('a-widget', 'right')
     api = TemplateAPI(root, dummy_request)
     assert api.slots.right == []
+
+
+def test_show_in_context(config, db_session, events,
+                         dummy_request, root):
+    from kotti.resources import Content
+    from kotti_settings.util import show_in_context
+
+    root[u'doc1'] = Content(title=u'some content')
+
+    assert show_in_context(u'everywhere', root) is True
+    assert show_in_context(u'everywhere', root[u'doc1']) is True
+    assert show_in_context(u'only on root', root) is True
+    assert show_in_context(u'only on root', root[u'doc1']) is False
+    assert show_in_context(u'not on root', root) is False
+    assert show_in_context(u'not on root', root[u'doc1']) is True
