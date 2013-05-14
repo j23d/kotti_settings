@@ -2,4 +2,5 @@ Todo
 ----
 
 [x] Only save the settings from the submitted form.
-[ ] Add default schemas to the readme.
+[x] Add default schemas to the readme.
+[ ] Remove not needed resources.

@@ -4,6 +4,7 @@ Changelog
 0.1b5(Unreleased)
 -----------------
 
+* Added documentation for the default schemas.
 
 
 0.1b4(2013-05-02)

@@ -2,12 +2,10 @@
 kotti_settings
 ==============
 
-Add a settings configuration to your Kotti site.
+Add a settings configuration to your Kotti site. |build status|_
 
-|Build Status|_
-
-.. |Build Status| image:: https://travis-ci.org/j23d/kotti_settings.png
-.. _`Build Status`: https://travis-ci.org/j23d/kotti_settings
+.. |build status| image:: https://travis-ci.org/j23d/kotti_settings.png
+.. _build status: https://travis-ci.org/j23d/kotti_settings
 
 `Find out more about Kotti`_
 
@@ -36,7 +34,7 @@ A setting tab is set up with with a dictionary. Here you define a name and a
 title for your tab, what are required. Optional arguments are success_message,
 either settings or schema, schema_factory and use_csrf_token.
 
-Define your settings in a dictionary:::
+Define your settings in a dictionary::
 
 	TestSettings = {
         'name': 'test_settings',
@@ -55,7 +53,7 @@ Define your settings in a dictionary:::
              'description': 'again a test setting',
              'default': 23, }]}
 
-Define your settings with a schema:::
+Define your settings with a schema::
 
     class StringSchemaNode(colander.SchemaNode):
         name = 'a_string'
@@ -86,27 +84,30 @@ settings in a populator in your add-on. Have a look to the Kotti documentation
 to get more informations for populators_ and to see an example_.
 
 
-Add your settings configuration within a populator, e.g. in a file named populate.py:::
+Add your settings configuration within a populator, e.g. in a file named populate.py::
 
     def populate():
         from kotti_settings.util import add_settings
         add_settings(TestSettings)
 
-and add this to your configuration:::
+and add this to your configuration::
 
     def kotti_configure(settings):
         settings['kotti.populators'] += ' my_addon.populate.populate'
 
-or directly to your ini file:::
+or directly to your ini file::
 
     kotti.populators = my_addon.populate.populate
 
 
-To get your setting back into your code you use the following:::
+To get your setting back into your code you use the following::
 
     from kotti_settings.util import get_setting
 
     first_test_setting = get_setting('test_setting_1')
+
+Events
+------
 
 Before and after the settings are saved events for handling the changes are fired. To subscribe
 to the events use something like::
@@ -121,7 +122,40 @@ to the events use something like::
             return
         my_fancy_thing()
 
+Default schemas
+---------------
+
+``kotti_settings`` provides some default schemas that you can use directly in your code and for
+example purposes. Currently there are two schemas implemented, one to choose in what slot the
+widget should be shown and another one to set the visibility of the widget. To use it in your
+addon place something like the following in your populator::
+
+    from kotti.views.slots import assign_slot
+    from kotti_settings.config import SlotSchemaNode
+    from kotti_settings.config import ShowInContextSchemaNode
+    from kotti_settings.util import add_settings
+    from kotti_settings.util import get_setting
+    from kotti_myaddon import _
+
+    class MyWidgetSchema(colander.MappingSchema):
+        slot = SlotSchemaNode(colander.String())
+        show_in_context = ShowInContextSchemaNode(colander.String())
+
+    MyAddonSettings = {
+        'name': 'myaddon_settings',
+        'title': _(u'My Addon Settings'),
+        'description': _(u"Settings for my addon"),
+        'success_message': _(u"Successfully saved my addon settings."),
+        'schema_factory': MyAddonSchema,
+    }
+
+    def populate():
+        add_settings(MyAddonSettings)
+
+You have a full example e.g. in the addon kotti_tagcloud_.
+
 
 .. _Find out more about Kotti: http://pypi.python.org/pypi/Kotti
 .. _populators: http://kotti.readthedocs.org/en/latest/developing/configuration.html#kotti-populators
 .. _example: http://kotti.readthedocs.org/en/latest/developing/frontpage-different-template.html
+.. _kotti_tagcloud: https://pypi.python.org/pypi/kotti_tagcloud
