@@ -7,7 +7,6 @@ from pyramid_deform import CSRFSchema
 from pyramid_deform import FormView
 from pyramid.httpexceptions import HTTPFound
 
-from kotti_settings.config import SETTINGS
 from kotti_settings.events import SettingsAfterSave
 from kotti_settings.events import SettingsBeforeSave
 from kotti_settings.util import get_settings
@@ -20,36 +19,13 @@ class SettingsSchema(colander.MappingSchema):
     pass
 
 
-class SettingsForm(deform.form.Form):
-    """Override the form class to take multiple forms in one
-       request into account. Every time a form on the settings
-       page is saved, all forms will be validated with the current
-       POST values, what are only the ones for the submitted form.
-    """
-
-    def validate(self, controls, subcontrol=None):
-        settings = get_settings()
-        keys = [c[0] for c in controls]
-        for key in settings.keys():
-            if key not in keys:
-                controls.append((key, str(settings[key])))
-        for settings in SETTINGS:
-            for obj in settings.settings_objs:
-                if obj.field_name not in keys:
-                    controls.append((obj.field_name, str(obj.default)))
-        return super(SettingsForm, self).validate(controls, subcontrol)
-
-
 class SettingsFormView(FormView):
     """The form template class for one setting tab.
     """
-    form_class = SettingsForm
+    form_class = deform.form.Form
     name = 'settings'
     title = _(u"Settings")
     description = u""
-    buttons = (
-        deform.Button('save', _(u'Save')),
-        deform.Button('cancel', _(u'Cancel')))
     success_message = _(u"Your changes have been saved.")
     success_url = None
     settings = None
@@ -91,6 +67,13 @@ class SettingsFormView(FormView):
                 continue
             if not child.name.startswith(self.settings.module):
                 child.name = "%s-%s" % (self.settings.module, child.name)
+        # Build up the buttons dynamically, so we can check what setting form
+        # was saved.
+        save = 'save_' + self.settings.module
+        self.buttons = (
+            deform.Button(save, _(u'Save')),
+            deform.Button('cancel', _(u'Cancel')))
+        setattr(self, save + '_success', self.save_success)
         return super(SettingsFormView, self).__call__()
 
     def before(self, form):
@@ -111,7 +94,7 @@ class SettingsFormView(FormView):
         raise TypeError("%s is not a class." % name)  # pragma: no cover
 
     def save_success(self, appstruct):
-        settings = get_settings()
+        from kotti_settings.util import set_setting
         formid = self.request.POST.get('__formid__', None)
         self.active = False
         if formid is not None and formid == self.settings.module:
@@ -124,7 +107,7 @@ class SettingsFormView(FormView):
             self.request.registry.notify(SettingsBeforeSave(module))
             for item in appstruct:
                 if appstruct[item] is not None:
-                    settings[item] = appstruct[item]
+                    set_setting(item, appstruct[item])
             ses = self.request.session
             if not '_f_success' in ses or\
                 not self.success_message in ses['_f_success']:

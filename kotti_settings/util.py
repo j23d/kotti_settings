@@ -25,6 +25,15 @@ def get_setting(name, default=None, modname=None):
     return default
 
 
+def set_setting(name, val):
+    settings = get_settings()
+    # It seems not possible to save a set type in a MutableDict,
+    # so convert it to a list.
+    if type(val) == set:
+        val = list(val)
+    settings[name] = val
+
+
 def get_settings():
     root = get_root()
     if "kotti_settings" not in root.annotations:
@@ -57,7 +66,8 @@ def add_settings(mod_settings):
             default = None
             if 'default' in setting:
                 default = setting['default']
-            settings[setting_obj.field_name] = default
+            if not setting_obj.field_name in settings:
+                settings[setting_obj.field_name] = default
             module_settings.settings_objs.append(setting_obj)
     if module_settings.schema_factory:
         schema = module_settings.schema_factory()
@@ -65,10 +75,11 @@ def add_settings(mod_settings):
             field_name = child.name
             if not field_name.startswith(module_settings.module):
                 field_name = u"%s-%s" % (module_settings.module, child.name)
-            value = None
-            if child.default is not colander.null:
-                value = child.default
-            settings[field_name] = value
+            if not field_name in settings:
+                value = None
+                if child.default is not colander.null:
+                    value = child.default
+                settings[field_name] = value
     SETTINGS.append(module_settings)
 
 
