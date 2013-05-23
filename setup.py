@@ -39,11 +39,6 @@ setup(
     install_requires=[
         'Kotti>=0.9a2',
     ],
-    entry_points={
-        'fanstatic.libraries': [
-            'kotti_settings = kotti_settings.fanstatic:library',
-        ],
-    },
     message_extractors={
         'kotti_settings': [
             ('**.py', 'lingua_python', None),

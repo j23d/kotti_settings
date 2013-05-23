@@ -7,6 +7,7 @@ Changelog
 * Added documentation for the default schemas.
 * Change the implementation to check what settings form was saved.
 * Added new util method 'set_setting' where value transformations are handled.
+* Removed not needed fanstatic resources.
 
 
 0.1b4(2013-05-02)
