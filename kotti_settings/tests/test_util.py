@@ -61,6 +61,21 @@ def test_get_setting_not_found(db_session, root):
     assert setting == 'default'
 
 
+def test_set_setting_conversion(db_session, root):
+    from kotti.sqla import NestedMutationList
+    from kotti_settings.util import get_setting
+    from kotti_settings.util import set_setting
+
+    set_setting('kotti_settings-test_conversion', set(['a', 'b', 'c']))
+    setting = get_setting('test_conversion')
+    assert type(setting) == NestedMutationList
+
+    # We sort this because we can't rely on the order in a set.
+    setting = list(setting)
+    setting.sort()
+    assert setting == ['a', 'b', 'c']
+
+
 def test_remove_widget_from_slot(config, db_session, events,
                                  dummy_request, root):
     from pyramid.response import Response
