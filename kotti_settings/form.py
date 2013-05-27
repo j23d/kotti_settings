@@ -3,6 +3,7 @@ import sys
 import colander
 import deform
 from types import ClassType
+from pyramid.decorator import reify
 from pyramid_deform import CSRFSchema
 from pyramid_deform import FormView
 from pyramid.httpexceptions import HTTPFound
@@ -69,19 +70,24 @@ class SettingsFormView(FormView):
                 child.name = "%s-%s" % (self.settings.module, child.name)
         # Build up the buttons dynamically, so we can check what setting form
         # was saved.
-        save = 'save_' + self.settings.module
+        save = 'save_' + self.form_id
         self.buttons = (
             deform.Button(save, _(u'Save')),
             deform.Button('cancel', _(u'Cancel')))
         setattr(self, save + '_success', self.save_success)
         return super(SettingsFormView, self).__call__()
 
+    @reify
+    def form_id(self):
+        form_id = "{0}-{1}".format(self.settings.module, self.name)
+        return form_id
+
     def before(self, form):
         settings = get_settings()
         for key in form.cstruct:
             if key in settings:
                 form.cstruct[key] = settings[key]
-        form.formid = self.settings.module
+        form.formid = self.form_id
 
     def colander_type(self, name):
         # http://docs.pylonsproject.org/projects/colander/en/latest/api.html#types
@@ -97,7 +103,7 @@ class SettingsFormView(FormView):
         from kotti_settings.util import set_setting
         formid = self.request.POST.get('__formid__', None)
         self.active = False
-        if formid is not None and formid == self.settings.module:
+        if formid is not None and formid == self.form_id:
             self.active = True
             appstruct.pop('csrf_token', None)
             module = None

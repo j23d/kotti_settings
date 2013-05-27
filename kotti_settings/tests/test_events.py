@@ -1,3 +1,5 @@
+from mock import patch
+from mock import PropertyMock
 from pyramid.events import subscriber
 
 from kotti_settings.events import SettingsAfterSave
@@ -27,6 +29,10 @@ def test_events_subscriber(db_session, settings_events, root, dummy_request):
     }
     add_settings(test_settings)
 
-    view = SettingsFormView(root, dummy_request)
-    view.save_success({})
-    assert VALUE == 'bar'
+    dummy_request.POST['__formid__'] = 'form_id'
+    with patch('kotti_settings.form.SettingsFormView.form_id',
+               new_callable=PropertyMock) as mock_meth:
+        mock_meth.return_value = 'form_id'
+        view = SettingsFormView(root, dummy_request)
+        view.save_success({})
+        assert VALUE == 'bar'

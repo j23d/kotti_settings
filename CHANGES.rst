@@ -8,6 +8,7 @@ Changelog
 * Change the implementation to check what settings form was saved.
 * Added new util method 'set_setting' where value transformations are handled.
 * Removed not needed fanstatic resources.
+* Changed the internal name of the forms to be more unique.
 
 
 0.1b4(2013-05-02)

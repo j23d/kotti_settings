@@ -41,21 +41,21 @@ Get to the settings page and change some settings
 
   >>> ctrl(name='kotti_settings-teststringsetting').value = 'hello you'
   >>> ctrl(name='kotti_settings-testrageintsetting').value = 'nan'
-  >>> ctrl(name='save_kotti_settings', index=0).click()
+  >>> ctrl(name='save_kotti_settings-test_settings_schema_browser').click()
   >>> 'There was a problem' in browser.contents
   True
   >>> '"nan" is not a number' in browser.contents
   True
 
   >>> ctrl(name='kotti_settings-testrageintsetting').value = '23'
-  >>> ctrl(name='save_kotti_settings', index=0).click()
+  >>> ctrl(name='save_kotti_settings-test_settings_schema_browser').click()
   >>> 'There was a problem' in browser.contents
   True
   >>> '23 is greater than maximum value 10' in browser.contents
   True
 
   >>> ctrl(name='kotti_settings-testrageintsetting').value = '7'
-  >>> ctrl(name='save_kotti_settings', index=0).click()
+  >>> ctrl(name='save_kotti_settings-test_settings_schema_browser').click()
   >>> 'type="text" name="kotti_settings-testrageintsetting" value="7"' in browser.contents
   True
   >>> 'type="text" name="kotti_settings-teststringsetting" value="hello you"' in browser.contents
@@ -67,6 +67,6 @@ Get to the settings page and change some settings
   >>> u"No changes made." in browser.contents
   True
 
-  >>> ctrl(name='save_kotti_settings', index=1).click()
+  >>> ctrl(name='save_kotti_settings-test_settings_dict').click()
   >>> 'type="text" name="kotti_settings-testsetting_2" value="23"' in browser.contents
   True

@@ -40,4 +40,7 @@ class SettingsView(object):
             dikt = view()
             dikt['view'] = view
             settings_form_views.append(dikt)
+            # disable active on the first form if there is another active one
+            if view.active and i != 0:
+                settings_form_views[0]['view'].active = False
         return {'settings_form_views': settings_form_views, }
