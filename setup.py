@@ -37,7 +37,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'Kotti>=0.9a2',
+        'Kotti>=0.9b2',
+        'pyramid_deform<=0.2',
     ],
     message_extractors={
         'kotti_settings': [

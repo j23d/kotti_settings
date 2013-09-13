@@ -13,6 +13,8 @@ from kotti_settings.events import SettingsBeforeSave
 from kotti_settings.util import get_settings
 from kotti_settings import _
 
+import itertools
+counter = itertools.count()
 
 class SettingsSchema(colander.MappingSchema):
     """An empty schema to have a named one if needed.
@@ -34,6 +36,7 @@ class SettingsFormView(FormView):
     use_csrf_token = True
     use_ajax = True
     active = False
+    form_options = {'counter': counter}
 
     def __init__(self, context, request, **kwargs):
         self.context = context

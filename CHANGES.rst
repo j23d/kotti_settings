@@ -9,6 +9,7 @@ Changelog
 * Added new util method 'set_setting' where value transformations are handled.
 * Removed not needed fanstatic resources.
 * Changed the internal name of the forms to be more unique.
+* Reinitialize chosen elements when tab is shown.
 
 
 0.1b4(2013-05-02)

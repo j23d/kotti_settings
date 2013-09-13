@@ -33,6 +33,16 @@
       </tal:repeat>
     </div>
 
+
+<script>
+  $(document).ready(function() {
+    // Reinitialize chosen elements when tab is shown.
+    $('.i-can-haz-chzn-select').chosen();
+    $('[data-toggle="tab"]').on('show', function(e) {
+        $('.i-can-haz-chzn-select').chosen();
+    });
+  });
+</script>
   </div>
 
 </html>
