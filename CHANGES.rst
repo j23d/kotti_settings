@@ -10,6 +10,8 @@ Changelog
 * Removed not needed fanstatic resources.
 * Changed the internal name of the forms to be more unique.
 * Reinitialize chosen elements when tab is shown.
+* Convert boolean to 'true' or 'false' to meet the requirements of deform's checkbox widget.
+
 
 
 0.1b4(2013-05-02)

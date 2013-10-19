@@ -16,6 +16,7 @@ from kotti_settings import _
 import itertools
 counter = itertools.count()
 
+
 class SettingsSchema(colander.MappingSchema):
     """An empty schema to have a named one if needed.
     """
@@ -89,7 +90,13 @@ class SettingsFormView(FormView):
         settings = get_settings()
         for key in form.cstruct:
             if key in settings:
-                form.cstruct[key] = settings[key]
+                # Convert boolean to 'true' or 'false' to meet the
+                # requirements of deform's checkbox widget.
+                if isinstance(settings[key], bool):
+                    value = settings[key] and 'true' or 'false'
+                else:
+                    value = settings[key]
+                form.cstruct[key] = value
         form.formid = self.form_id
 
     def colander_type(self, name):
