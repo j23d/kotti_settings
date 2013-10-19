@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.1b5(Unreleased)
------------------
+0.1(2013-10-19)
+---------------
 
 * Added documentation for the default schemas.
 * Change the implementation to check what settings form was saved.
@@ -11,7 +11,6 @@ Changelog
 * Changed the internal name of the forms to be more unique.
 * Reinitialize chosen elements when tab is shown.
 * Convert boolean to 'true' or 'false' to meet the requirements of deform's checkbox widget.
-
 
 
 0.1b4(2013-05-02)
@@ -58,4 +57,4 @@ Changelog
 0.1a1(2013-03-06)
 -----------------
 
-- Initial release.
+* Initial release.
