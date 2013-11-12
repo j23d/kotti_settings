@@ -5,6 +5,7 @@ Changelog
 ---------------
 
 * Only scan the needed views file.
+* Added MANIFEST.in to get rid of the local folder.
 
 
 0.1(2013-10-19)
