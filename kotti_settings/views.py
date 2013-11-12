@@ -44,3 +44,7 @@ class SettingsView(object):
             if view.active and i != 0:
                 settings_form_views[0]['view'].active = False
         return {'settings_form_views': settings_form_views, }
+
+
+def includeme(config):
+    config.scan(__name__)
