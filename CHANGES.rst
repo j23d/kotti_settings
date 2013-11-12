@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2(Unreleased)
+0.2(2013-11-12)
 ---------------
 
 * Only scan the needed views file.
