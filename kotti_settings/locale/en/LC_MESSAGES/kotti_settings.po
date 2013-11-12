@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kotti_settings 0.1a1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-03-05 17:29+0100\n"
+"POT-Creation-Date: 2013-11-12 23:58+0100\n"
 "PO-Revision-Date: 2013-03-05 17:22+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -18,28 +18,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: kotti_settings/__init__.py:12 kotti_settings/form.py:46
+#: kotti_settings/__init__.py:12 kotti_settings/form.py:31
 #: kotti_settings/templates/settings.pt:7
 msgid "Settings"
 msgstr "Settings"
 
-#: kotti_settings/form.py:49
-msgid "Save"
-msgstr "Save"
+#: kotti_settings/config.py:10
+msgid "left"
+msgstr "left"
 
-#: kotti_settings/form.py:50
-msgid "Cancel"
-msgstr "Cancel"
+#: kotti_settings/config.py:11
+msgid "right"
+msgstr "right"
 
-#: kotti_settings/form.py:51
+#: kotti_settings/config.py:12
+msgid "abovecontent"
+msgstr "abovecontent"
+
+#: kotti_settings/config.py:13
+msgid "belowcontent"
+msgstr "belowcontent"
+
+#: kotti_settings/config.py:14
+msgid "beforebodyend"
+msgstr "beforebodyend"
+
+#: kotti_settings/config.py:19
+msgid "Direction"
+msgstr "Direction"
+
+#: kotti_settings/config.py:24
+msgid "Everywhere"
+msgstr "Everywhere"
+
+#: kotti_settings/config.py:25
+msgid "Only on root"
+msgstr "Only on root"
+
+#: kotti_settings/config.py:26
+msgid "Not on root"
+msgstr "Not on root"
+
+#: kotti_settings/config.py:27
+msgid "Nowhere"
+msgstr "Nowhere"
+
+#: kotti_settings/config.py:32
+msgid "Show in context"
+msgstr "Show in context"
+
+#: kotti_settings/form.py:33
 msgid "Your changes have been saved."
 msgstr "Your changes have been saved."
 
-#: kotti_settings/form.py:122
+#: kotti_settings/form.py:79
+msgid "Save"
+msgstr "Save"
+
+#: kotti_settings/form.py:80
+msgid "Cancel"
+msgstr "Cancel"
+
+#: kotti_settings/form.py:134
 msgid "No changes made."
 msgstr "No changes made."
 
 #: kotti_settings/templates/settings.pt:8
-msgid "Here you find can adjust the settings of the add-ons."
-msgstr "Here you find can adjust the settings of the add-ons."
+msgid "Here you can adjust the settings of the add-ons."
+msgstr "Here you can adjust the settings of the add-ons."
 
