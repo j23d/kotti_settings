@@ -10,6 +10,10 @@ here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 
+tests_require = [
+    'wsgi_intercept==0.5.1',
+]
+
 setup(
     name=project,
     version=version,
@@ -36,10 +40,16 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
+    test_requires=[
+        tests_require,
+    ],
     install_requires=[
         'Kotti>=0.9b2',
         'pyramid_deform<=0.2',
     ],
+    extras_require={
+        'testing': tests_require,
+    },
     message_extractors={
         'kotti_settings': [
             ('**.py', 'lingua_python', None),
