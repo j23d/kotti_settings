@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      metal:use-macro="api.macro('kotti:templates/view/master.pt')"
+      metal:use-macro="api.macro('kotti:templates/edit/master.pt')"
       i18n:domain="kotti_settings">
 
   <div metal:fill-slot="content" class="abc-view content">
