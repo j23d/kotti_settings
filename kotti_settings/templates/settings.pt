@@ -6,7 +6,7 @@
   <div metal:fill-slot="content" class="abc-view content">
     <h1 i18n:translate="">Settings</h1>
     <p class="description" i18n:translate="">
-      Here you find can adjust the settings of the add-ons.
+      Here you can adjust the settings of the add-ons.
     </p>
 
     <ul class="nav nav-tabs">

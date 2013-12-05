@@ -1,10 +1,17 @@
 Changelog
 =========
 
-0.2(Unreleased)
+0.3(Unreleased)
 ---------------
 
 * Use the edit template as macro for the settings page.
+
+
+0.2(2013-11-12)
+---------------
+
+* Only scan the needed views file.
+* Added MANIFEST.in to get rid of the local folder.
 
 
 0.1(2013-10-19)

@@ -13,7 +13,7 @@ def test_kotti_configure():
 
     kotti_configure(settings)
 
-    assert settings['pyramid.includes'] == ' kotti_settings'
+    assert settings['pyramid.includes'] == ' kotti_settings kotti_settings.views'
 
 
 def test_includeme(config):
