@@ -45,7 +45,6 @@ setup(
     ],
     install_requires=[
         'Kotti>=0.9b2',
-        'pyramid_deform<=0.2',
     ],
     extras_require={
         'testing': tests_require,
