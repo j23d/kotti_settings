@@ -7,8 +7,14 @@ project = 'kotti_settings'
 version = '0.3dev'
 
 here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, 'README.rst')).read()
-CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
+try:
+    README  = open(os.path.join(here, 'README.rst')).read()
+    AUTHORS = open(os.path.join(here, 'AUTHORS.txt')).read()
+    CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
+except IOError:
+    README = AUTHORS = CHANGES = ''
+
+
 
 tests_require = [
     'wsgi_intercept==0.5.1',
@@ -18,7 +24,7 @@ setup(
     name=project,
     version=version,
     description="Settings configuration for Kotti",
-    long_description=README + '\n\n' + CHANGES,
+    long_description=README + '\n\n' + AUTHORS + '\n\n' + CHANGES,
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Pylons",
