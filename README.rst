@@ -21,7 +21,7 @@ you setup Fanstatic) section could then look like this::
     kotti.configurators = kotti_settings.kotti_configure
 
 The add-on adds a new configuration page to save settings for your module or
-accross different modules. It adds a new submenupoint named "Settings" to the
+across different modules. It adds a new submenupoint named "Settings" to the
 menupoint "Site Setup". Every setting collection is presented in one tab. It
 is intended to use one tab for a module, but it is also possible to use
 multiple tabs if you have the need for a more extended structure.
