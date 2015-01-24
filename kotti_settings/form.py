@@ -62,7 +62,6 @@ class SettingsFormView(FormView):
                 name=setting_obj.field_name,
                 title=setting_obj.title,
                 description=setting_obj.description,
-                #missing=setting_obj.default,
                 default=setting_obj.default
             )
             self.schema.children.append(node)
