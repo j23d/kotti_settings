@@ -1,6 +1,6 @@
-pytest_plugins = "kotti"
-
 from pytest import fixture
+
+pytest_plugins = "kotti"
 
 
 @fixture
