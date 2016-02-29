@@ -5,6 +5,7 @@ Changelog
 ---------------
 
 * Use the edit template as macro for the settings page.
+* Added deform_bootstrap to requirements, fixes #4.
 
 
 0.2(2013-11-12)

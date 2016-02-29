@@ -46,6 +46,7 @@ setup(
     ],
     install_requires=[
         'Kotti>=0.9b2',
+        'deform_bootstrap'
     ],
     extras_require={
         'testing': tests_require,
