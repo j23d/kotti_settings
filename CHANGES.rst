@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3(Unreleased)
+0.3(2016-02-29)
 ---------------
 
 * Use the edit template as macro for the settings page.
